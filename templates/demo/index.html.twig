@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+ 
+{% block title %}Project index{% endblock %}
+ 
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Symfony Project Manager</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-primary" href="{{ path('app_demo_new') }}"> 
+                    Create New Project 
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>School Name </th>
+                        <th>Date Created</th>
+                        <th>Date Updated</th>
+                        <th width="240px">Action</th>
+                    </tr>
+                    {% for demo in demos %}
+                    <tr>
+                        <td>{{ demo.name }}</td>
+                        <td>{{ demo.description }}</td>
+                         <td>{{ demo.schoolname }}</td>
+                        <td>{{ demo.createdAt ? demo.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ demo.updated ? demo.updated|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_demo_delete', {'id': demo.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info"
+                                    href="{{ path('app_demo_delete', {'id': demo.id}) }}">
+                                    Show
+                                </a>
+                                <a
+                                    class="btn btn-outline-success"
+                                    href="{{ path('app_demo_edit', {'id': demo.id}) }}">
+                                    Edit
+                                </a>
+ 
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ demo.id) }}">
+                                <button class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+ 
+{% endblock %}
