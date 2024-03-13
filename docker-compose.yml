@@ -9,6 +9,8 @@ services:
       - .:/app
     environment:
       - SYMFONY_PROJECT_NAME=symfony
+      - SYMFONY_PROJECT_SKELETON=symfony/skeleton
+
     depends_on:
       - mysql
 
