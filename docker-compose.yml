@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  symfony:
+    image: 'bitnami/symfony:latest'
+    ports:
+      - '80:80'
+    volumes:
+      - .:/app
+    environment:
+      - SYMFONY_PROJECT_NAME=symfony
+    depends_on:
+      - mysql
+
+  mysql:
+    image: 'bitnami/mysql:latest'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=symfony
