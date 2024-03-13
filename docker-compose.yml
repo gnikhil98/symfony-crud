@@ -10,7 +10,8 @@ services:
     environment:
       - SYMFONY_PROJECT_NAME=symfony
       - SYMFONY_PROJECT_SKELETON=symfony/skeleton
-      - SYMFONY_DATABASE_HOST=mysql  
+      - SYMFONY_DATABASE_HOST=mysql
+      - SYMFONY_DATABASE_PASSWORD=root  
     depends_on:
       - mysql
 
